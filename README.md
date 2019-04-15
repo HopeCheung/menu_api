@@ -40,41 +40,6 @@ A menu api
    }
 
 6. Result: Test result is shown in the test_output.txt
-eg:
-{
-  "MenuSection": [
-    {
-      "id": "1",
-      "name": "Lunch Specials",
-      "item": [
-        "Chicken",
-        "Beef"
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Dinner Specials",
-      "item": [
-        "Pork",
-        "Sheep"
-      ]
-    },
-    {
-      "id": "4",
-      "name": "Breakfast specials",
-      "item": [
-        "bread"
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Old specials",
-      "item": [
-        "coffee"
-      ]
-    }
-  ]
-}
   
    
    
