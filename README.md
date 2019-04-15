@@ -19,6 +19,7 @@ A menu api
    GET /api/menusection/id  --------return corresponding row with specific id
    
    POST /api/menusection    --------insert an item
+   
    body:
    {
       id: id,
@@ -27,7 +28,8 @@ A menu api
    }
    
    POST /api/menusection/id  -------insert an item to specific row
-    body:
+   
+   body:
    {
       name: name,
       item: item
@@ -36,7 +38,9 @@ A menu api
    DELETE /api/menusection/id ------- delete corresponding row with specific id
    
    PUT /api/menusection/id/temp ----- update the row satisfying the temp with new items
+   
    eg: /api/menusection/3/name=New specials,item=milk
+   
    body:
    {
 	    "name": "New specials",
