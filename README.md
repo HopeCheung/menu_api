@@ -8,11 +8,12 @@ A menu api
 3. visit.py is the test program, and the result is shown in test_result.txt
 
 4. To run the program:
-	   (1). run create_database.py if menu.db doesn't exist;
 
-	   (2). run the menu.py;
+		(1). run create_database.py if menu.db doesn't exist;
 
-	   (3). you can try GET, PUT, POST and DELETE through postman.
+		(2). run the menu.py;
+
+		(3). you can try GET, PUT, POST and DELETE through postman.
 
 5. GET /api/menusection     --------return all the items
 
