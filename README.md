@@ -9,10 +9,13 @@ A menu api
 
 4. To run the program:
    (1). run create_database.py if menu.db doesn't exist;
+   
    (2). run the menu.py;
+   
    (3). you can try GET, PUT, POST and DELETE through postman.
 
 5. GET /api/menusection     --------return all the items
+
    GET /api/menusection/id  --------return corresponding row with specific id
    
    POST /api/menusection    --------insert an item
@@ -22,6 +25,7 @@ A menu api
       name: name,
       item: item
    }
+   
    POST /api/menusection/id  -------insert an item to specific row
     body:
    {
