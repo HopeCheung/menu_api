@@ -8,11 +8,11 @@ A menu api
 3. visit.py is the test program, and the result is shown in test_result.txt
 
 4. To run the program:
-   (1). run create_database.py if menu.db doesn't exist;
-   
-   (2). run the menu.py;
-   
-   (3). you can try GET, PUT, POST and DELETE through postman.
+	   (1). run create_database.py if menu.db doesn't exist;
+
+	   (2). run the menu.py;
+
+	   (3). you can try GET, PUT, POST and DELETE through postman.
 
 5. GET /api/menusection     --------return all the items
 
@@ -20,32 +20,32 @@ A menu api
    
    POST /api/menusection    --------insert an item
    
-   body:
-   {
-      id: id,
-      name: name,
-      item: item
-   }
+	   body:
+	   {
+	      id: id,
+	      name: name,
+	      item: item
+	   }
    
    POST /api/menusection/id  -------insert an item to specific row
    
-   body:
-   {
-      name: name,
-      item: item
-   }
+	   body:
+	   {
+	      name: name,
+	      item: item
+	   }
    
    DELETE /api/menusection/id ------- delete corresponding row with specific id
    
    PUT /api/menusection/id/temp ----- update the row satisfying the temp with new items
    
-   eg: /api/menusection/3/name=New specials,item=milk
-   
-   body:
-   {
-	    "name": "New specials",
-	    "item": "milk"
-   }
+	   eg: /api/menusection/3/name=New specials,item=milk
+
+	   body:
+	   {
+		    "name": "New specials",
+		    "item": "milk"
+	   }
 
 6. Result: Test result is shown in the test_output.txt
   
