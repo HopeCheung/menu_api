@@ -1,0 +1,211 @@
+----------------------------Test GET-------------------------------
+{
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dinner Specials",
+      "item": [
+        "Pork",
+        "Sheep"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Specials of the day",
+      "item": [
+        "Salad",
+        "Vegetables"
+      ]
+    }
+  ]
+}
+----------------------------Test GET with ID-------------------------------
+{
+  "success": true,
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    }
+  ]
+}
+----------------------------Test POST-------------------------------
+{
+  "success": true,
+  "MenuSection": [
+    {
+      "id": "4",
+      "name": "Breakfast specials",
+      "item": [
+        "bread"
+      ]
+    }
+  ]
+}
+----------------------------After insert new item-------------------------------
+{
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dinner Specials",
+      "item": [
+        "Pork",
+        "Sheep"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Specials of the day",
+      "item": [
+        "Salad",
+        "Vegetables"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Breakfast specials",
+      "item": [
+        "bread"
+      ]
+    }
+  ]
+}
+----------------------------Test DELETE-------------------------------
+{
+  "success": true
+}
+----------------------------After Deletion-------------------------------
+{
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dinner Specials",
+      "item": [
+        "Pork",
+        "Sheep"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Breakfast specials",
+      "item": [
+        "bread"
+      ]
+    }
+  ]
+}
+----------------------------Test POST with ID-------------------------------
+{
+  "success": true,
+  "MenuSection": [
+    {
+      "id": "3",
+      "name": "New specials",
+      "item": [
+        "milk"
+      ]
+    }
+  ]
+}
+----------------------------After insert new item-------------------------------
+{
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dinner Specials",
+      "item": [
+        "Pork",
+        "Sheep"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Breakfast specials",
+      "item": [
+        "bread"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "New specials",
+      "item": [
+        "milk"
+      ]
+    }
+  ]
+}
+----------------------------Upload item with id=3,name=New specials,item=milk------------------------------
+{
+  "success": true
+}
+----------------------------After update item 3-------------------------------
+{
+  "MenuSection": [
+    {
+      "id": "1",
+      "name": "Lunch Specials",
+      "item": [
+        "Chicken",
+        "Beef"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Dinner Specials",
+      "item": [
+        "Pork",
+        "Sheep"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Breakfast specials",
+      "item": [
+        "bread"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Old specials",
+      "item": [
+        "coffee"
+      ]
+    }
+  ]
+}

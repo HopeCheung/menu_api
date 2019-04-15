@@ -57,7 +57,7 @@ def explain_what():
 
     return response
 
-@app.route('/api/menusection', methods=["GET", "POST"])
+@app.route('/api/menusection', methods=["GET", "POST","PUT"])
 def handle_data():
     if request.method == "GET":
         q = 'select * from menu'
@@ -65,56 +65,80 @@ def handle_data():
 
         ans = {}
         ans["MenuSection"] = []
+        backup = {}
         for elem in result:
-            ans["MenuSection"].append({"id": elem[0], "name": elem[1]})
+            backup[str(elem[0]) + "_" + elem[1]] = backup.get(str(elem[0]) + "_" + elem[1], []) + [elem[2]]
+        for elem in backup:
+            id, name = elem.split("_")[0], elem.split("_")[1]
+            ans["MenuSection"].append({"id": id, "name": name, "item":backup[elem]})
         resp = Response(json.dumps(ans, indent=2), status=200, mimetype='application/json')
         return resp
 
-    else:
+    elif request.method == "POST":
         new_r = request.get_json()
+        q = 'insert into menu values (' + str(new_r["id"]) + ',"' + new_r["name"] + '", "' + new_r["item"] + '")'
+        run_query(q)
+
         w_clause, args = template_to_where_clause(new_r)
-        args = map(lambda k: "'" + k + "'", args)
+        args[1:] = map(lambda k: '"' + k + '"', args[1:])
         q = 'select * from menu ' + w_clause + " "
         result = run_query(q % tuple(args))
 
         ans = {}
         ans["success"] = True
         ans["MenuSection"] = []
+        backup = {}
         for elem in result:
-            ans["MenuSection"].append({"id": elem[0], "name": elem[1]})
+            backup[str(elem[0]) + "_" + elem[1]] = backup.get(str(elem[0]) + "_" + elem[1], []) + [elem[2]]
+        for elem in backup:
+            id, name = elem.split("_")[0], elem.split("_")[1]
+            ans["MenuSection"].append({"id": id, "name": name, "item": backup[elem]})
         resp = Response(json.dumps(ans, indent=2), status=200, mimetype='application/json')
         return resp
 
-@app.route('/api/menusection/<id>', methods=["GET", "POST", "DELETE"])
+
+@app.route('/api/menusection/<id>', methods=["GET", "POST", "DELETE", "PUT"])
 def handle_specific_data(id):
     if request.method == "GET":
         q = 'select * from menu where id= ' + id
         result = run_query(q)
 
         ans = {}
+        ans["success"] = True
         ans["MenuSection"] = []
+        backup = {}
         for elem in result:
-            ans["MenuSection"].append({"id": elem[0], "name": elem[1]})
+            backup[str(elem[0]) + "_" + elem[1]] = backup.get(str(elem[0]) + "_" + elem[1], []) + [elem[2]]
+        for elem in backup:
+            id, name = elem.split("_")[0], elem.split("_")[1]
+            ans["MenuSection"].append({"id": id, "name": name, "item": backup[elem]})
         resp = Response(json.dumps(ans, indent=2), status=200, mimetype='application/json')
         return resp
 
     elif request.method == "POST":
         new_r = request.get_json()
         new_r["id"] = id
+        q = 'insert into menu values (' + str(new_r["id"]) + ',"' + new_r["name"] + '", "' + new_r["item"] + '")'
+        run_query(q)
+
         w_clause, args = template_to_where_clause(new_r)
-        args = map(lambda k: "'" + k + "'", args)
+        args[:-1] = map(lambda k: '"' + k + '"', args[:-1])
         q = 'select * from menu ' + w_clause + " "
         result = run_query(q % tuple(args))
 
         ans = {}
         ans["success"] = True
         ans["MenuSection"] = []
+        backup = {}
         for elem in result:
-            ans["MenuSection"].append({"id":elem[0], "name":elem[1]})
+            backup[str(elem[0]) + "_" + elem[1]] = backup.get(str(elem[0]) + "_" + elem[1], []) + [elem[2]]
+        for elem in backup:
+            id, name = elem.split("_")[0], elem.split("_")[1]
+            ans["MenuSection"].append({"id": id, "name": name, "item": backup[elem]})
         resp = Response(json.dumps(ans, indent=2), status=200, mimetype='application/json')
         return resp
 
-    else:
+    elif request.method == "DELETE":
         q = 'delete from menu where id = ' + id
         run_query(q)
 
@@ -122,6 +146,38 @@ def handle_specific_data(id):
         ans["success"] = True
         resp = Response(json.dumps(ans, indent=2), status=200, mimetype='text/plain')
         return resp
+
+
+@app.route('/api/menusection/<id>/<temp>', methods=["PUT"])
+def update_data(id, temp):
+    new_r = request.get_json()
+    terms = []
+    set_args = []
+    for k, v in new_r.items():
+        terms.append(k + '=%s')
+        set_args.append(v)
+    set_args = list(map(lambda k: '"' + k + '"', set_args))
+
+    temp = temp.split(",")
+    template = {}
+    for t in temp:
+        t = t.split("=")
+        template[t[0]] = t[1]
+    template["id"] = id
+    w_clause, args = template_to_where_clause(template)
+    args[:-1] = map(lambda k: '"' + k + '"', args[:-1])
+    set_args.extend(args)
+    print(set_args)
+
+    q = "update menu set " + ", ".join(terms) + " " + w_clause
+    q = q % tuple(set_args)
+    print(q)
+    run_query(q)
+
+    ans = {}
+    ans["success"] = True
+    resp = Response(json.dumps(ans, indent=2), status=200, mimetype='text/plain')
+    return resp
 
 if __name__ == '__main__':
     app.run()
